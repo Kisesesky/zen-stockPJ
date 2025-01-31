@@ -6,7 +6,7 @@ import './config/passport.js'
 mongoose.connect(process.env.DATABASE_URL || '')
     .then(() => {
         console.log("db connected");
-        app.listen(3002, () => {
+        app.listen(3003, () => {
             console.log("server running");
         });
     })
