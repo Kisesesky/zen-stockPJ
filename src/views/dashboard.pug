@@ -25,13 +25,26 @@ html(lang="en")
           
 
     main
-      section.section-title
-        h2 차트 표시 구역
-      include chart.pug
+      .stocks-container
+      // 통계 요약 섹션
+      #summaryStats.summary-stats
+        // 여기에 통계가 동적으로 추가됨
 
-      section.section-title
-        h2 종목 정보
-      include mainstock.pug
+      // 주식 테이블
+      .stocks-table-container
+        table.stocks-table
+          thead
+            tr
+              th 종목
+              th 현재가
+              th 변동
+              th 변동률
+              th 거래량
+              th 시가총액
+          tbody#stocksBody
+            // 여기에 주식 데이터가 동적으로 추가됨
+
+    script(src='/js/dashboard.js')
 
     footer.zenstock-footer zenstock
       .footer-links

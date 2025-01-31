@@ -12,15 +12,11 @@ async function toggleFavoriteStock(userId: mongoose.Types.ObjectId, symbol: stri
       });
     }
 
-    // 이미 해당 symbol이 있는지 확인
     const symbolExists = favorite.stocks.includes(symbol);
     
     if (symbolExists) {
-      // symbol이 이미 있으면 제거
-      favorite.stocks = favorite.stocks.filter(s => s !== symbol);
-    } else {
-      // symbol이 없으면 추가
-      favorite.stocks.push(symbol);
+      favorite.stocks = favorite.stocks.filter((s: string) => s !== symbol);
+    } else {      favorite.stocks.push(symbol);
     }
     
     await favorite.save();
@@ -30,6 +26,18 @@ async function toggleFavoriteStock(userId: mongoose.Types.ObjectId, symbol: stri
     console.error('Failed to toggle favorite stock:', error);
     return { favoriteAdded: false };
   }
+}
+
+async function getFavoriteList(userId: mongoose.Types.ObjectId) {
+    try {
+        const favorite = await Favorite.findById(userId);
+        return {
+            stocks: favorite?.stocks || []
+        };
+    } catch (error) {
+        console.error('Failed to get favorite list:', error);
+        throw error;
+    }
 }
 
 async function memo(userId: mongoose.Types.ObjectId, memo: string) {
@@ -47,5 +55,6 @@ async function memo(userId: mongoose.Types.ObjectId, memo: string) {
 
 export default {
   toggleFavoriteStock,
+  getFavoriteList,
   memo
 }

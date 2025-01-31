@@ -10,6 +10,7 @@ import stockRouter from './routes/api/v1/stock.route.js';
 import chartRouter from './routes/api/v1/chart.route.js';
 import mainStockRouter from './routes/api/v1/mainstock.route.js';
 import marketRouter from './routes/api/v1/market.route.js';
+import favoriteRouter from './routes/api/v1/favorite.route.js';
 import path from 'path';
 
 dotenv.config();
@@ -85,6 +86,8 @@ app.use('/api/v1/stock', stockRouter);
 app.use('/api/v1/chart', chartRouter);
 app.use('/api/v1/mainstock', mainStockRouter);
 app.use('/api/v1/market', marketRouter);
+app.use('/api/v1/favorite', favoriteRouter);
+
 
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error(err.stack);
