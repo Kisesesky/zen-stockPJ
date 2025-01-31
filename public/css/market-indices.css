@@ -1,0 +1,57 @@
+.market-indices {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.index-card {
+    width: calc(33.33% - 20px);
+    min-width: 200px;
+    padding: 15px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.index-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.index-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.index-price {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.index-change {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.index-chart {
+    width: 400px !important;
+    height: 300px !important;
+    margin-top: 10px;
+}
+
+.positive {
+    color: #2870a7;
+}
+
+.negative {
+    color: #dc3545;
+}

@@ -1,0 +1,30 @@
+doctype html
+html(lang='ko')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title 실시간 인기 종목
+    link(rel='stylesheet' href='/css/mainStock.css')
+  
+  body
+    .stocks-container
+      .header
+        
+        button.refresh-btn(onclick='fetchAndUpdateMainStocks()') 새로고침
+      
+      .stocks-table-container
+        table.stocks-table#main-stock-table
+          thead
+            tr
+              th Like
+              th 종목
+              th 현재가
+              th 변동
+              th 변동률
+              th 거래량
+              th 시가총액
+          tbody#main-stock-container
+            // 메인 데이터
+
+    script(src='/js/mainstock.js')
+

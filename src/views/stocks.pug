@@ -1,0 +1,31 @@
+doctype html
+html(lang='ko')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title 주식 요약
+    link(rel='stylesheet' href='/css/stocks.css')
+  
+  body
+    .stocks-container
+      .header
+        h1.page-title 실시간 주식 요약
+        button.refresh-btn(onclick='fetchAndUpdateStocks()') 새로고침
+      
+      #summaryStats.summary-stats
+        //- 전체 통계
+      
+      .stocks-table-container
+        table.stocks-table#stocksTable
+          thead
+            tr
+              th 종목
+              th 현재가
+              th 변동
+              th 변동률
+              th 거래량
+              th 시가총액
+          tbody#stocksBody
+            //- 주식 데이터
+
+    script(src='/js/stocks.js') 

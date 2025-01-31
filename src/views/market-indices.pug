@@ -1,0 +1,28 @@
+doctype html
+html(lang='ko')
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title /*ZenStock*/
+    link(rel="icon", href="/images/favicon-32x32.png", type="image/x-icon")
+    link(rel="shortcut icon", href="/images/favicon-32x32.png", type="image/x-icon")
+    link(rel='stylesheet' href='/css/chart.css')
+    script(src='https://cdn.jsdelivr.net/npm/chart.js')
+
+block content
+    if indices && indices.length > 0
+        .market-indices
+            each index in indices
+                .index-card
+                    .index-name= index.name
+                    .index-price= `$${index.price.toFixed(2)}`
+                    .index-change(class=index.change >= 0 ? 'positive' : 'negative')
+                        span= `${index.change >= 0 ? '+' : ''}${index.change.toFixed(2)}`
+                        span= ` (${index.changePercent.toFixed(2)}%)`
+                    canvas.index-chart(id=`chart-${index.symbol}`)
+    else
+        .market-indices-error
+            p 시장 데이터를 불러오는 중입니다...
+
+script(src="https://cdn.jsdelivr.net/npm/chart.js")
+script(src="/js/market-indices.js")

@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    text-decoration: none;
+  }
+  
+  .stocks-container {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+  }
+  
+  .header {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      margin-bottom: 20px;
+  }
+  
+  .page-title{
+    font-size: 25px;
+    font-weight: bold;
+    color: #333;
+    padding: 10px;
+    border-bottom: 1px solid #f3f0f0;
+
+  }
+  
+
+  .stocks-table {
+      width: 800px;
+      border-collapse: collapse;
+  }
+  
+  .stocks-table th,
+  .stocks-table td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+  }
+  
+  .positive {
+      color: red;
+      font-weight: bold;
+      font-size: 14px;
+  }
+  
+  .negative {
+      color: blue;
+      font-weight: bold;
+      font-size: 14px;
+  }
+  
+  .stock-name {
+      font-weight: bold;
+      color: black;
+      text-align: left;
+  }
+  
+  .stock-symbol {
+      color: #666;
+      font-size: 0.9em;
+      text-align: left;
+  }
+  .favorite-btn{
+    font-size: 17px;
+    color: yellow;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .refresh-btn {
+      padding: 8px 16px;
+      background-color: #459fff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+  
+  .refresh-btn:hover {
+      background-color: #0056b3;
+  } 
+  
+  thead th{
+    text-align: center;
+    background-color: #f3f0f0;
+    font-weight: bold;
+  }
+  .stock{
+    text-align: left;
+  } 
+  
+  tbody td{
+    text-align: center;
+  }
+  
+

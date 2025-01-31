@@ -1,0 +1,83 @@
+doctype html
+html(lang='ko')
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title /*ZenStock*/
+    link(rel="icon", href="/images/favicon-32x32.png", type="image/x-icon")
+    link(rel="shortcut icon", href="/images/favicon-32x32.png", type="image/x-icon")
+    link(rel='stylesheet' href='/css/stock.data.css')
+  
+  body.body-container
+    header
+      nav
+        ul#nav-bar
+          li: a#logo2(href="/users/main") */ZenStock/*
+          li: a#home(href="/users/main") Home
+          li: a#intro(href="/users/intro") intro
+          li: a#userinfo(href="/users/userinfo") 회원정보
+          li: a#dashboard(href="/users/dashboard") 대시보드
+          if user.username.length > 10
+            li: a#username(href="#" class="sparkle") User님 반갑습니다.
+          else 
+            li: a#username(href="#" class="sparkle") #{user.username}님 반갑습니다.
+          li: a#logoutBtn(href="/users/logout") LogOut
+
+    main
+      #stockInfo.stock-container
+        .loading-state
+          .stock-header
+          div
+            .stock-name.skeleton 회사명
+            .stock-symbol.skeleton 심볼
+          .current-price.skeleton 가격
+        
+        .price-section
+          .price-change.skeleton 변동률
+        
+        .market-data
+          .data-item
+            .data-label 시가
+            .data-value.skeleton --
+          .data-item
+            .data-label 고가
+            .data-value.skeleton --
+          .data-item
+            .data-label 저가
+            .data-value.skeleton --
+          .data-item
+            .data-label 거래량
+            .data-value.skeleton --
+          .data-item
+            .data-label 시가총액
+            .data-value.skeleton --
+          .data-item
+            .data-label 52주 범위
+            .data-value.skeleton --
+        
+        .last-updated.skeleton
+          | 마지막 업데이트: --
+    
+    script(src='/js/stock.data.js') 
+
+    footer.zenstock-footer zenstock
+      .footer-links
+        a(href="#") Meta
+        span ·
+        a(href="#") About
+        span ·
+        a(href="#") Blog
+        span ·
+        a(href="#") Jobs
+        span ·
+        a(href="#") Help
+        span ·
+        a(href="#") API
+        span ·
+        a(href="#") Privacy
+        span ·
+        a(href="#") Terms
+        span ·
+        a(href="#") Locations
+      .footer-copyright
+        span © 2024 ZenStock from elice

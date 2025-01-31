@@ -1,0 +1,56 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/style.css")
+        title /*ZenStock*/
+        link(rel="icon", href="/images/favicon-32x32.png", type="image/x-icon")
+        link(rel="shortcut icon", href="/images/favicon-32x32.png", type="image/x-icon")
+        script.
+            function confirmWithdraw() {
+                if (confirm('정말로 탈퇴하시겠습니까?')) {
+                    document.getElementById('withdrawForm').submit();
+                }
+            }
+    body#loginbody
+        h1#logo */ZenStock/*
+        h1#loginheader  
+        
+        form#login-form(action="/users/main",method="post")
+            label(for="email" style="font-weight: bold;") Email
+            input(type="email", id="email", name="email", value=user ? user.email : '', readonly)
+            hr
+            label(for="username" style="font-weight: bold;") Username
+            input(type="text", id="username", name="username", value=user ? user.username : '', readonly)
+            hr
+            label(for="birth" style="font-weight: bold;") Birth
+            input(type="date", id="birth", name="birth", value=user && user.birth ? user.birth.toISOString().split('T')[0] : '', readonly)
+            hr
+            button(type="submit" style="font-weight: bold;") 수정하기
+        
+        form#withdrawForm(action="/api/v1/users/withdraw", method="post")
+            button#withdrawBtn(type="button", onclick="confirmWithdraw()" style="font-weight: bold;") 회원탈퇴
+
+    footer.zenstock-footer zenstock
+      .footer-links
+        a(href="#") Meta
+        span ·
+        a(href="#") About
+        span ·
+        a(href="#") Blog
+        span ·
+        a(href="#") Jobs
+        span ·
+        a(href="#") Help
+        span ·
+        a(href="#") API
+        span ·
+        a(href="#") Privacy
+        span ·
+        a(href="#") Terms
+        span ·
+        a(href="#") Locations
+      .footer-copyright
+        span © 2024 ZenStock from elice

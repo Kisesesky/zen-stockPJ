@@ -1,0 +1,177 @@
+.chart-container {
+    max-width: 800px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.symbol-title {
+    font-size: 24px;
+    margin: 0;
+}
+
+.period-selector button {
+    padding: 8px 16px;
+    margin: 0 4px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.period-selector button:hover {
+    background-color: #e9ecef;
+}
+
+.period-selector button.active {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+.market-indices{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}   
+.index-name{
+    font-size: 17px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+.index-price{
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 12px;
+}
+.index-change{
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 12px;
+}
+canvas {
+    width: 300px !important;
+    height: 200px !important;
+    border-bottom: 1px solid #dbd9d9;
+    border-left: 1px solid #dbd9d9;
+    margin: 15px;
+} 
+.body-container{
+    margin-top: 100px;
+}
+#nav-bar{
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    flex-direction: row;
+    align-items: center;
+    list-style-type: none;
+    padding-left: 0;
+    text-decoration: none;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    margin: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+#nav-bar li a{
+    text-decoration: none;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    text-wrap-mode: nowrap;
+}
+#home, #intro, #userinfo, #dashboard{
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+}
+#logo2{
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 70%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    margin: 20px 0px 0px 0px;
+    text-decoration: none;
+}
+
+#logoutBtn{
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font : solid;
+    font-weight: bold;
+}
+#username{
+    font-size: 10px;
+    color: #000000;
+}
+@keyframes sparkle {
+    0% {
+        color: black;
+        text-shadow: 0 0 5px #000000, 0 0 10px #000000, 0 0 15px #000000;
+    }
+    50% {
+        color: #fff;
+        text-shadow: 0 0 5px #ffffff, 0 0 10px #fff, 0 0 15px #fff;
+    }
+    100% {
+        color: black;
+        text-shadow: 0 0 5px #000000, 0 0 10px #000000, 0 0 15px #000000;
+    }
+}
+
+.sparkle {
+    animation: sparkle 1.5s infinite;
+}
+.zenstock-footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #737373;
+    font-size: 12px;
+}
+
+.footer-links {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #737373;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-links span {
+    margin: 0 8px;
+    color: #737373;
+}
+
+.footer-copyright {
+    color: #737373;
+    font-size: 12px;
+}

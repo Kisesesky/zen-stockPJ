@@ -1,0 +1,29 @@
+doctype html
+html(lang='ko')
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title /*ZenStock*/
+    link(rel="icon", href="/images/favicon-32x32.png", type="image/x-icon")
+    link(rel="shortcut icon", href="/images/favicon-32x32.png", type="image/x-icon")
+    link(rel='stylesheet' href='/css/chart.css')
+    script(src='https://cdn.jsdelivr.net/npm/chart.js')
+  
+
+  body
+    .chart-container
+      .header
+        h1.symbol-title #{symbol}
+        .period-selector
+          - const periods = [{id: '1d', text: '1일'}, {id: '1mo', text: '1개월'}, {id: '3mo', text: '3개월'}, {id: '6mo', text: '6개월'}, {id: '1y', text: '1년'}, {id: 'max', text: '전체'}]
+          each period in periods
+            button.period-btn(
+              onclick=`changePeriod('${period.id}')` 
+              data-period=period.id
+              class=period.id === '1y' ? 'active' : ''
+            )= period.text
+      
+      canvas#stockChart
+    
+    script(src="/js/chart.js") 
+

@@ -1,0 +1,50 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/style.css")
+
+
+        title /*ZenStock*/
+        link(rel="icon", href="/images/favicon-32x32.png", type="image/x-icon")
+        link(rel="shortcut icon", href="/images/favicon-32x32.png", type="image/x-icon")
+    body#loginbody
+
+        h1#logo */ZenStock/*
+            h1#joinheader  
+            
+            form#join-form(action="/api/v1/users/signup", method="post")
+              if fieldErrorMessage
+                    .error-message(style="color: white; text-align: center; margin-bottom: 10px; font-weight: bold;")
+                        = fieldErrorMessage
+
+              if emailErrorMessage
+                    .error-message(style="color: white; text-align: center; margin-bottom: 10px; font-weight: bold;")
+                        = emailErrorMessage
+
+              if typeErrorMessage
+                    .error-message(style="color: white; text-align: center; margin-bottom: 10px; font-weight: bold;")
+                        = typeErrorMessage
+              if passwordErrorMessage
+                    .error-message(style="color: white; text-align: center; margin-bottom: 10px; font-weight: bold;")
+                        = passwordErrorMessage
+
+              label(for="email" style="font-weight: bold;") Email
+              input(type="email", id="email", name="email", placeholder="Enter your email")
+              hr
+              label(for="username" style="font-weight: bold;") Username
+              input(type="text", id="username", name="username", placeholder="Enter your username")
+              hr
+              label(for="password" style="font-weight: bold;") Password
+              input(type="password", id="password", name="password", placeholder="Enter your password")
+              hr
+              label(for="passwordconfirm" style="font-weight: bold;") Password Confirm
+              input(type="password", id="passwordconfirm", name="passwordConfirm", placeholder="Confirm your password")
+              hr
+              label(for="birth" style="font-weight: bold;" ) Birth
+              input(type="date", id="birth", name="birth", placeholder="Select your birthdate")
+              hr
+
+              button(type="submit" style="font-weight: bold;") 회원가입
