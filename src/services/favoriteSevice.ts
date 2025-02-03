@@ -1,3 +1,5 @@
+//favoriteSevice.ts
+
 import { Favorite, Stock } from "../models/index.js";
 import mongoose from "mongoose";
 

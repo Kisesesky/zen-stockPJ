@@ -1,14 +1,18 @@
+//dashboard.pug
+
 doctype html
-html(lang="en")
+html(lang='ko')
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title /*ZenStock*/
     link(rel="icon", href="/images/favicon-32x32.png", type="image/x-icon")
     link(rel="shortcut icon", href="/images/favicon-32x32.png", type="image/x-icon")
-    link(rel="stylesheet", href="/css/style.css")
+    link(rel='stylesheet' href='/css/mainStock.css')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
 
-  body.body-container
+  
+    body.body-container
     header
       nav
         ul#nav-bar
@@ -22,10 +26,9 @@ html(lang="en")
           else 
             li: a#username(href="#" class="sparkle") #{user.username}님 반갑습니다.
           li: a#logoutBtn(href="/users/logout") LogOut
-          
-
+    
     main
-      .stocks-container
+    .stocks-container
       // 통계 요약 섹션
       #summaryStats.summary-stats
         // 여기에 통계가 동적으로 추가됨
@@ -35,6 +38,7 @@ html(lang="en")
         table.stocks-table
           thead
             tr
+              th Like
               th 종목
               th 현재가
               th 변동
@@ -45,7 +49,7 @@ html(lang="en")
             // 여기에 주식 데이터가 동적으로 추가됨
 
     script(src='/js/dashboard.js')
-
+  
     footer.zenstock-footer zenstock
       .footer-links
         a(href="#") Meta

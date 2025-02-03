@@ -1,3 +1,5 @@
+//favorite.route.ts
+
 import { Router, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import favoriteService from '../../../services/favoriteSevice.js';

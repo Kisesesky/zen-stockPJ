@@ -1,3 +1,5 @@
+//index.ts
+
 import express from "express";
 import userRouter from "./users.route.js";
 import stockRouter from "./stock.route.js";

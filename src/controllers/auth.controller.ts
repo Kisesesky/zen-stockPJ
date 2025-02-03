@@ -1,3 +1,5 @@
+//auth.controller.ts
+
 import { Request, Response, NextFunction } from 'express';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';

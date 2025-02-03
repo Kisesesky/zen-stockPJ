@@ -1,3 +1,5 @@
+//stock.ts
+
 import mongoose from "mongoose";
 
 const stockSchema = new mongoose.Schema({

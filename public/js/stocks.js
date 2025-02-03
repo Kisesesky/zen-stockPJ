@@ -1,3 +1,5 @@
+//stocks.js
+
 "use strict";
 async function fetchAndUpdateStocks() {
     try {

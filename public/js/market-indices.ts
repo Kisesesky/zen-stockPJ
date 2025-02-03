@@ -1,3 +1,5 @@
+//market-indices.ts
+
 // Chart.js를 브라우저에서 직접 로드
 declare const Chart: any;
 
@@ -55,6 +57,6 @@ async function createMarketChart(symbol: string): Promise<void> {
 document.addEventListener('DOMContentLoaded', () => {
     const indices = ['^IXIC', '^GSPC', '^DJI'];
     indices.forEach(symbol => {
-        createChart(symbol);
+        createMarketChart(symbol);
     });
 });

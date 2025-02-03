@@ -1,5 +1,3 @@
-//users.ts
-
 import mongoose,{ Schema, Document } from "mongoose";
 import  bcrypt from 'bcrypt';
 
@@ -11,7 +9,6 @@ export interface IUser extends Document {
     registerType: "normal" | "google" | "kakao" | "naver";
     socialId?: string;
     birth?: Date;
-    favorites?: mongoose.Types.ObjectId;
     _json?: {
         oauth?: {
             kakao?: {
@@ -51,35 +48,15 @@ const UserSchema = new Schema<IUser>(
         birth:{
             type:Date
         },
-        favorites: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Favorite'
-        }
     },
     {
         timestamps: true,
     }
 )
-UserSchema.pre('save', async function (next) {
-    try {
-        if (this.isNew) {
-            if (this.password) {
-                this.password = await bcrypt.hash(this.password, 10);
-            }
+UserSchema.pre('save', async function () {
+    if(this.password && this.isNew || this.isModified('password'))
+        this.password = await bcrypt.hash(this.password, 10)
 
-            const Favorite = mongoose.model('Favorite');
-            const favorite = await Favorite.create({
-                _id: this._id,
-                stocks: []
-            });
-            this.favorites = favorite._id;
-        } else if (this.isModified('password')) {
-            this.password = await bcrypt.hash(this.password, 10);
-        }
-        next();
-    } catch (error) {
-        next(error as Error);
-    }
 })
 const User = mongoose.model<IUser>("User", UserSchema)
 

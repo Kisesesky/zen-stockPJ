@@ -1,3 +1,5 @@
+//@types/index.d.ts
+
 import { IUser } from "../models/schemas/users"
 import { Request, Response, NextFunction } from 'express';
 

@@ -1,3 +1,5 @@
+//stock.data.js
+
 "use strict";
 async function fetchStockData(symbol) {
     try {

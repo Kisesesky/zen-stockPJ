@@ -1,3 +1,5 @@
+//mainstock.route.ts
+
 import { Router, Request, Response } from 'express';
 import stockService from '../../../services/stockservice.js';
 

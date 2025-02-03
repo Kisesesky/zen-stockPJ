@@ -1,0 +1,39 @@
+doctype html
+html(lang='ko')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title 주식 요약
+    link(rel='stylesheet' href='/css/stock-detail.css')
+  
+  body
+    block content
+    .stock-detail-container
+        if error
+            .error-message
+                p= error
+        else
+            .stock-header
+                h1#stockSymbol.stock-title(data-symbol=symbol)
+                    span.stock-name= stock.shortName
+                    span.stock-symbol= `(${symbol})`
+
+            .chart-section
+                .chart-controls
+                    button#period-1d.period-btn 1일
+                    button#period-1w.period-btn 1주
+                    button#period-1m.period-btn 1개월
+                    button#period-3m.period-btn 3개월
+                    button#period-6m.period-btn 6개월
+                    button#period-1y.period-btn.active 1년
+                    button#period-5y.period-btn 5년
+                    button#period-max.period-btn 전체
+                .chart-container
+                    canvas#stockChart
+    include stock_data.pug
+block scripts
+    if !error
+        script(src="https://cdn.jsdelivr.net/npm/chart.js")
+        script(src="/js/stock-detail.js")
+        script(src="/js/chart.js")
+

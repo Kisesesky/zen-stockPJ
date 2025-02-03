@@ -1,3 +1,5 @@
+//mainstock.ts
+
 export interface MarketData {
     regularMarketPrice: number
     regularMarketChange: number;
@@ -36,8 +38,8 @@ export function updateStockTable(stocks: StockData[]): void {
         
         return `
             <tr class="stock-row">
-                 <td>
-                    <a href="/api/favorite/add/${stock.symbol}">⭐</a>
+                <td>
+                    <a href="#" onclick="addFavorite('${stock.symbol}'); return false;">☆</a>
                 </td>
                 <td>
                     <a href="/api/v1/stock/view/${stock.symbol}">
@@ -52,11 +54,28 @@ export function updateStockTable(stocks: StockData[]): void {
                 <td class="${isPositive ? 'positive' : 'negative'}">
                     ${isPositive ? '+' : ''}${stock.marketData.regularMarketChangePercent.toFixed(2)}%
                 </td>
-                <td>${stock.marketData.regularMarketVolume.toLocaleString()}</td>
-                <td>${marketCap.toFixed(2)}B</td>
+                <td class="volume">${stock.marketData.regularMarketVolume.toLocaleString()}</td>
+                <td class="market-cap">${marketCap.toFixed(2)}B</td>
             </tr>
         `;
     }).join('');
+}
+
+async function addFavorite(symbol: string) {
+    try {
+        const response = await fetch(`/api/v1/favorite/add/${symbol}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        });
+        if (!response.ok) {
+            throw new Error('Failed to add favorite');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 // 초기 로드 및 자동 업데이트

@@ -1,3 +1,5 @@
+//index.ts
+
 import stockSchema from './schemas/stock.js';
 import mongoose from 'mongoose';
 import favoriteSchema from './schemas/favorite.js';

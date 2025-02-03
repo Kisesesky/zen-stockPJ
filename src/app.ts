@@ -1,3 +1,5 @@
+//app.ts
+
 import express from "express";
 import route from './routes/api/v1/index.js';
 import viewRouter from "./routes/view/index.js";
@@ -12,8 +14,14 @@ import mainStockRouter from './routes/api/v1/mainstock.route.js';
 import marketRouter from './routes/api/v1/market.route.js';
 import favoriteRouter from './routes/api/v1/favorite.route.js';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import userViewRouter from './routes/view/users.view.router.js';
 
 dotenv.config();
+
+// ES 모듈에서 __dirname 얻기
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -77,11 +85,12 @@ app.use((req, res, next) => {
     })(req, res, next);
 });
 
-app.set("views", "./src/views");
-app.set("view engine", "pug");
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 app.use('/api/v1', route);
 app.use('/', viewRouter);
+app.use('/user', userViewRouter);
 app.use('/api/v1/stock', stockRouter);
 app.use('/api/v1/chart', chartRouter);
 app.use('/api/v1/mainstock', mainStockRouter);

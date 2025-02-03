@@ -1,9 +1,12 @@
+//users.view.router.ts
+
 import express from 'express'
 import User, { IUser } from '../../models/schemas/users.js'
 import mongoose from 'mongoose';
 import axios from 'axios';
 import { newsService } from '../../services';
 import marketIndexService from '../../services/marketIndexService.js';
+import stockService from '../../services/stockservice.js';
 
 const router = express.Router()
 
@@ -75,6 +78,23 @@ router.get('/market-indices', isAuthenticated, async(req,res)=>{
     res.render('market-indices', { user: req.user });
 })
 
+router.get('/stock-detail/:symbol', isAuthenticated, async(req, res) => {
+    try {
+        const { symbol } = req.params;
+        const stockData = await stockService.getStockQuote(symbol);
+        res.render('stock-detail', { 
+            user: req.user, 
+            symbol: symbol,
+            stock: stockData,
+            title: `${stockData.shortName} (${symbol}) - Stock Detail`
+        });
+    } catch (error) {
+        console.error('Stock detail error:', error);
+        res.status(500).render('error', { 
+            message: '주식 데이터를 불러오는 중 오류가 발생했습니다.' 
+        });
+    }
+});
 
 router.get('/logout', (req, res) => {
     req.logout((err) => {
@@ -93,7 +113,5 @@ router.get('/logout', (req, res) => {
         });
     });
 });
-
-
 
 export default router

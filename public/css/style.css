@@ -1,3 +1,5 @@
+/* 전체 스타일 */
+
 #logo{
     border-radius: 70%;
     width: 200px;
@@ -377,8 +379,8 @@ main {
     align-items: center;
     gap: 10px;
     width: 300px;
-    min-height: 150px;
-    margin: 10px;
+    min-height: 120px;
+    margin: 6px;
     border-bottom: 1px solid  #f3f0f0;
     flex-direction: column;
 }
@@ -455,95 +457,3 @@ main {
     color: #737373;
     font-size: 12px;
 }
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-    text-decoration: none;
-  }
-  
-  .stocks-container {
-      padding: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-  }
-  
-  .header {
-      display: flex;
-      justify-content: end;
-      align-items: center;
-      margin-bottom: 20px;
-  }
-  
-  .page-title{
-    font-size: 25px;
-    font-weight: bold;
-    color: #333;
-    padding: 10px;
-    border-bottom: 1px solid #f3f0f0;
-
-  }
-  
-
-  .stocks-table {
-      width: 800px;
-      border-collapse: collapse;
-  }
-  
-  .stocks-table th,
-  .stocks-table td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-  }
-  
-  .positive {
-      color: red;
-      font-weight: bold;
-      font-size: 14px;
-  }
-  
-  .negative {
-      color: blue;
-      font-weight: bold;
-      font-size: 14px;
-  }
-  
-  .stock-name {
-      font-weight: bold;
-      color: black;
-  }
-  
-  .stock-symbol {
-      color: #666;
-      font-size: 0.9em;
-  }
- 
-  .refresh-btn {
-      padding: 8px 16px;
-      background-color: #459fff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-  }
-  
-  .refresh-btn:hover {
-      background-color: #0056b3;
-  } 
-  
-  thead th{
-    text-align: center;
-    background-color: #f3f0f0;
-    font-weight: bold;
-  }
-  .stock{
-    text-align: left;
-  } 
-  
-  tbody td{
-    text-align: center;
-  }
-  
-

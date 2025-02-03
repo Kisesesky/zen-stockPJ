@@ -1,6 +1,9 @@
+//stock.route.ts
+
 import express, { Request, Response, Router } from 'express';
 import path from 'path';
 import stockService from '../../../services/stockservice.js';
+import yahooFinance from 'yahoo-finance2';
 
 interface StockData {
     symbol: string;
@@ -113,6 +116,68 @@ router.get('/view/:symbol', (req: Request, res: Response) => {
 
 router.get('/stocks', (_req: Request, res: Response) => {
     res.render('stocks');  
+});
+
+router.get('/quote/:symbol', async (req, res) => {
+    try {
+        const { symbol } = req.params;
+        
+        const quote = await yahooFinance.quote(symbol);
+        
+        const stockData = {
+            symbol: quote.symbol,
+            shortName: quote.shortName,
+            currency: quote.currency,
+            marketCap: quote.marketCap,
+            marketData: {
+                regularMarketPrice: quote.regularMarketPrice,
+                regularMarketChange: quote.regularMarketChange,
+                regularMarketChangePercent: quote.regularMarketChangePercent,
+                regularMarketVolume: quote.regularMarketVolume,
+                regularMarketPreviousClose: quote.regularMarketPreviousClose
+            }
+        };
+        
+        res.json(stockData);
+    } catch (error) {
+        console.error(`Error fetching quote for ${req.params.symbol}:`, error);
+        res.status(500).json({ error: '주식 데이터를 불러오는 중 오류가 발생했습니다.' });
+    }
+});
+
+router.get('/chart/:symbol', async (req, res) => {
+    try {
+        const { symbol } = req.params;
+        const { period = '1y' } = req.query;
+        const chartData = await stockService.getStockChartData(symbol, period as string);
+        res.json(chartData);
+    } catch (error) {
+        console.error('Chart data error:', error);
+        res.status(500).json({ error: '차트 데이터를 불러오는 중 오류가 발생했습니다.' });
+    }
+});
+router.get('/:symbol', async (req: Request, res: Response): Promise<void> => {
+    try{
+        const symbol = req.params.symbol;
+        const stockData = await stockService.getStockQuote(symbol);
+
+        if(!stockData){
+            return res.status(404).render('error', {
+                message: '주식 데이터를 찾을 수 없습니다.'
+            });
+        }
+        console.log(stockData);
+
+        res.render('stock-detail', {
+            stock: stockData,
+            symbol,
+        });
+    } catch (error) {
+        console.error('Error fetching stock data:', error);
+        res.render('stock-detail', {
+            error: '주식 데이터를 불러오는 중 오류가 발생했습니다.'
+        });
+    }
 });
 
 export default router;  

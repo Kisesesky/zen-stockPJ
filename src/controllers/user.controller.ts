@@ -1,3 +1,5 @@
+//user.controller.ts
+
 import { Request, Response } from 'express';
 import User from '../models/schemas/users.js';
 import { unlinkSocialAccount } from '../services/social-auth.service.js';

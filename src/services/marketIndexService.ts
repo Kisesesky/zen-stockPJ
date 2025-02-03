@@ -1,3 +1,5 @@
+//marketIndexService.ts
+
 import yahooFinance from 'yahoo-finance2';
 
 interface MarketIndex {

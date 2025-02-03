@@ -1,3 +1,5 @@
+//mainstock.pug
+
 doctype html
 html(lang='ko')
   head
@@ -5,13 +7,11 @@ html(lang='ko')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     title 실시간 인기 종목
     link(rel='stylesheet' href='/css/mainStock.css')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css')
   
   body
     .stocks-container
       .header
-        
-        button.refresh-btn(onclick='fetchAndUpdateMainStocks()') 새로고침
-      
       .stocks-table-container
         table.stocks-table#main-stock-table
           thead

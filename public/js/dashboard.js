@@ -1,3 +1,5 @@
+//dashboard.js
+
 async function fetchAndUpdateStocks() {
     try {
         const favoriteResponse = await fetch('/api/v1/favorite/list');
@@ -39,7 +41,12 @@ async function fetchAndUpdateStocks() {
             tbody.innerHTML = stocks.map(stock => {
                 const isPositive = stock.marketData.regularMarketChange >= 0;
                 return `
-                    <tr class="stock-row">
+                    <tr class="stock-row" style="background-color: #FAFAFA;">
+                        <td>
+                            <a href="#" onclick="removeFavorite('${stock.symbol}'); return false;">
+                                <i class="fa-solid fa-star" style="color: #FFD700;"></i>
+                            </a>
+                        </td>
                         <td>
                             <a href="/api/v1/stock/view/${stock.symbol}">
                                 <div class="stock-name">${stock.shortName}</div>
@@ -49,8 +56,8 @@ async function fetchAndUpdateStocks() {
                         <td class="price">${stock.currency} ${stock.marketData.regularMarketPrice.toFixed(2)}</td>
                         <td class="${isPositive ? 'positive' : 'negative'}">${isPositive ? '+' : ''}${stock.marketData.regularMarketChange.toFixed(2)}</td>
                         <td class="${isPositive ? 'positive' : 'negative'}">${isPositive ? '+' : ''}${stock.marketData.regularMarketChangePercent.toFixed(2)}%</td>
-                        <td>${stock.marketData.regularMarketVolume.toLocaleString()}</td>
-                        <td>${(stock.marketCap / 10 ** 9).toFixed(2)}B</td>
+                        <td class="volume">${stock.marketData.regularMarketVolume.toLocaleString()}</td>
+                        <td class="market-cap">${(stock.marketCap / 10 ** 9).toFixed(2)}B</td>
                     </tr>
                 `;
             }).join('');
@@ -60,9 +67,29 @@ async function fetchAndUpdateStocks() {
         const stocksBody = document.getElementById('stocksBody');
         if (stocksBody) {
             stocksBody.innerHTML = `
-                <tr><td colspan="6" class="error-message">즐겨찾기한 종목을 불러오는 중 오류가 발생했습니다.</td></tr>
+                <tr><td colspan="7" class="error-message">즐겨찾기한 종목을 불러오는 중 오류가 발생했습니다.</td></tr>
             `;
         }
+    }
+}
+
+// 즐겨찾기 제거 함수
+window.removeFavorite = async function(symbol) {
+    try {
+        const response = await fetch(`/api/v1/favorite/add/${symbol}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        });
+        if (!response.ok) {
+            throw new Error('Failed to remove favorite');
+        }
+        // 성공 시 테이블 새로고침
+        await fetchAndUpdateStocks();
+    } catch (error) {
+        console.error('Error:', error);
     }
 }
 

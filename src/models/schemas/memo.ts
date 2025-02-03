@@ -1,3 +1,5 @@
+//memo.ts 작업중
+
 // import mongoose from "mongoose";
 
 // const memoSchema = new mongoose.Schema({

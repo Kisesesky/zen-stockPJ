@@ -1,5 +1,3 @@
-//market-indices.js
-
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,63 +34,125 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function createChart(symbol) {
-    return __awaiter(this, void 0, void 0, function () {
+var chartInstance = null;
+function createStockChart(symbol_1) {
+    return __awaiter(this, arguments, void 0, function (symbol, period) {
         var response, data, canvas, error_1;
+        if (period === void 0) { period = '1y'; }
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, fetch("/api/v1/market/chart/".concat(symbol))];
+                    if (chartInstance) {
+                        chartInstance.destroy();
+                    }
+                    return [4 /*yield*/, fetch("/api/v1/stock/chart/".concat(symbol, "?period=").concat(period))];
                 case 1:
                     response = _a.sent();
+                    if (!response.ok) {
+                        throw new Error("HTTP error! status: ".concat(response.status));
+                    }
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = _a.sent();
-                    canvas = document.getElementById("chart-".concat(symbol));
+                    canvas = document.getElementById('stockChart');
                     if (!canvas) {
-                        console.error("Canvas not found for ".concat(symbol));
+                        console.error('Canvas not found');
                         return [2 /*return*/];
                     }
-                    // 차트 생성
-                    new Chart(canvas, {
+                    chartInstance = new Chart(canvas, {
                         type: 'line',
                         data: {
                             labels: data.map(function (d) { return new Date(d.date).toLocaleDateString(); }),
                             datasets: [{
                                     data: data.map(function (d) { return d.close; }),
-                                    borderColor: 'rgb(3, 123, 75)',
-                                    borderWidth: 1.5,
+                                    borderColor: '#4CAF50',
+                                    borderWidth: 2,
                                     fill: false,
-                                    tension: 0,
-                                    pointRadius: 0
+                                    tension: 0.4,
+                                    pointRadius: 0,
+                                    pointHoverRadius: 5
                                 }]
                         },
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
+                            interaction: {
+                                intersect: false,
+                                mode: 'index'
+                            },
                             plugins: {
-                                legend: { display: false }
+                                legend: { display: false },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            return "$".concat(context.raw.toFixed(2));
+                                        }
+                                    }
+                                }
                             },
                             scales: {
-                                x: { display: false, grid: { display: false } },
-                                y: { display: false, grid: { display: false } }
+                                x: {
+                                    display: true,
+                                    grid: { display: false }
+                                },
+                                y: {
+                                    display: true,
+                                    grid: { color: 'rgba(0, 0, 0, 0.1)' }
+                                }
                             }
                         }
                     });
                     return [3 /*break*/, 4];
                 case 3:
                     error_1 = _a.sent();
+                    console.error("Error creating chart for ".concat(symbol, ":"), error_1);
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
             }
         });
     });
 }
-// 페이지 로드 시 각 지수에 대한 차트 생성
-document.addEventListener('DOMContentLoaded', function () {
-    var indices = ['^IXIC', '^GSPC', '^DJI'];
-    indices.forEach(function (symbol) {
-        createChart(symbol);
+function setupPeriodButtons() {
+    var periods = ['1d', '1w', '1m', '3m', '6m', '1y', '5y', 'max'];
+    periods.forEach(function (period) {
+        var button = document.getElementById("period-".concat(period));
+        if (button) {
+            button.addEventListener('click', function () {
+                // 모든 버튼에서 active 클래스 제거
+                document.querySelectorAll('.period-btn').forEach(function (btn) {
+                    btn.classList.remove('active');
+                });
+                // 클릭된 버튼에 active 클래스 추가
+                button.classList.add('active');
+                updateChartPeriod(period);
+            });
+        }
     });
+}
+function updateChartPeriod(period) {
+    return __awaiter(this, void 0, void 0, function () {
+        var symbol;
+        var _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    symbol = (_a = document.getElementById('stockSymbol')) === null || _a === void 0 ? void 0 : _a.dataset.symbol;
+                    if (!symbol)
+                        return [2 /*return*/];
+                    return [4 /*yield*/, createStockChart(symbol, period)];
+                case 1:
+                    _b.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+document.addEventListener('DOMContentLoaded', function () {
+    var _a;
+    var symbol = (_a = document.getElementById('stockSymbol')) === null || _a === void 0 ? void 0 : _a.dataset.symbol;
+    if (symbol) {
+        createStockChart(symbol);
+        setupPeriodButtons();
+    }
 });

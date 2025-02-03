@@ -1,3 +1,5 @@
+//stocks.ts
+
 export interface MarketData {
     regularMarketPrice: number;
     regularMarketChange: number;
